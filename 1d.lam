@@ -1,0 +1,25 @@
+let
+ true = \a b.a;
+ false = \a b.b;
+ is_zero = \n . n (\x.false) (true);
+ if = \b e1 e2. b e1 e2;
+ not = \b. if b false true;
+ 
+
+ even = \n. n  (not) (true);
+ pair = \a b. \c. c a b;
+ fst = \p. p true;
+ snd = \p. p false;
+ succ = \n. (\a. \b. a (n a b));
+ shift_inc = \p. pair (snd p) (succ (snd p));
+ 
+ pred = \n. fst (n shift_inc (pair 0 0));
+ sub = \n1 n2. n2 pred n1;
+ menor = \n1 n2. not(is_zero(sub n2 n1));
+ maior = \n1 n2. is_zero(sub n2 n1); 
+
+ Y = \f. (\x. f(x x)) (\x. f(x x));
+ div3 = Y (\r. \a. if(menor a 3)  0 (succ(r (sub a 3))));
+ 
+in
+ div3 9
