@@ -16,7 +16,7 @@ let
  pred = \n. fst (n shift_inc (pair 0 0));
  sub = \n1 n2. n2 pred n1;
  menor = \n1 n2. not(is_zero(sub n2 n1));
- maior = \n1 n2. is_zero(sub n2 n1); 
+ maior = \n1 n2. not(is_zero(sub n1 n2)); 
  
 in
  maior 10 2
