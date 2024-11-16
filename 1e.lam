@@ -1,0 +1,42 @@
+let
+
+true = \x y. x;
+false = \x y. y;
+
+-- Booleans
+
+if = \b e1 e2. b e1 e2;
+not = \b. b false true;
+and = \b1 b2. if b1 b2 false;
+or = \b1 b2. if b1 true b2; 
+xnor = \b1 b2. if b1 b2 (not b2);
+xor = \b1 b2. if b1 (not b2) b2;
+
+-- Numeros naturais
+succ = \n. \A B. A(n A B);
+add = \n1 n2. n1 succ n2;
+mult = \n1 n2. n1 (\x. add n2 x) 0;
+exp = \n1 n2. n2 (\x. mult n1 x) 1;
+exp2 = \n1 n2. n2 n1;
+
+-- Testes
+isZero = \n. n(\x.false)(true);
+isPos = \n. not (isZero n);
+
+
+-- Pares
+pair = \m n. \b. b m n;
+fst = \p. p true;
+snd = \p. p false;
+shiftInc = \p. pair (snd p)(succ (snd p));
+swap = \p. pair((snd p)(fst p));
+prev = \n. fst (n shiftInc (pair 0 0));
+
+sub = \a b. b prev a;
+menor = \a b. isPos (sub b a);
+
+-- Questao
+invFrac = \p. if (isPos (fst p)) (pair (snd p) (fst p)) p;
+
+in
+invFrac (pair 2 3)
