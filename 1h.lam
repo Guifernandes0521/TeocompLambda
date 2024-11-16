@@ -47,6 +47,7 @@ tail = snd;
 
 Y = \f. (\x. f (x x)) (\x. f (x x));
 
+-- Questao
 r_fib = \R.\n. if (isZero n) 
                            0 
                            (if (isOne n) 
@@ -54,9 +55,6 @@ r_fib = \R.\n. if (isZero n)
                                        (add (R (prev n)) (R (prev (prev n)))));
 
 fib = Y r_fib;
--- Questao
-
 
 in
 fib 4
-
